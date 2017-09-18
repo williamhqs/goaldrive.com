@@ -2,7 +2,7 @@ markdown: kramdown
 highlighter: pygments
 permalink: /posts/:title.html
 # excerpt_separator: "<!-- more -->"
-
+theme: jekyll-theme-architect
 github: williamhqs
 author: William Hu
 email: 
@@ -31,7 +31,9 @@ collections:
 
 plugins_dir:
  - jekyll-paginate
+ 
 gems: [jekyll-paginate]
+gem "github-pages", group: :jekyll_plugins
 defaults:
     -
         scope:
