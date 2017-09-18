@@ -1,0 +1,127 @@
+---
+layout: post
+title: Swift 简书- 内存管理ARC （二）
+published: true
+date:   2015-10-05 12:20
+categories:
+tags:
+comments: true
+description: 上一篇讲了两个实例变量强引用彼此的时候造成的Cycle。但是当分配一个闭包属性给一个类的实例变量的时候也会发生这样的情况，闭包的body会抓着（capture）那个实例变量。
+---
+
+
+
+[上一篇](http://www.goaldrive.com/2015/swift2-arc/) 讲了几本的内存管理ARC，这一篇继续
+
+###闭包的强引用循环###
+上一篇讲了两个实例变量强引用彼此的时候造成的Cycle。但是当分配一个闭包属性给一个类的实例变量的时候也会发生这样的情况，闭包的body会抓着（capture）那个实例变量。
+
+也就是闭包里面访问一个实例变量 self.propery 或者调用一个实例变量的方法 self.someMethod()，这两种情况都会导致闭包抓着***self*** 这样就建立了强引用循环。
+
+这样的cycle发生因为闭包就想类似的也是引用类型。你分配给一个属性是闭包类型，你就是给闭包分配了一个引用。
+
+其实本质上和上一篇讲的都是一样的问题，然后这次不是两个类的实例变量，这次是一个实例变量一个是闭包互相引用了彼此。
+
+解决方法***closure capture list***
+
+首先产生这样的一种情况：
+
+```
+class HTMLElement {
+    let name: String
+    let text: String?
+    
+    init (name: String, text: String?) {
+        self.name = name
+        self.text = text
+    }
+    
+    lazy var asHTML: Void -> String = {
+        if let text = self.text {
+            return "<\(self.name)>\(text)</\(self.name)>"
+        } else {
+            return "<\(self.name) />"
+        }
+    }
+    deinit {
+        print("\(name) is being deinitialized")
+    }
+}
+
+```
+
+引用情况：
+![](https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Art/closureReferenceCycle01_2x.png)
+
+调用：
+
+```
+var paragraph: HTMLElement? = HTMLElement(name: "p", text: "hello, world")
+print(paragraph!.asHTML())
+
+paragraph = nil
+```
+
+deinitializer 不会被调用。
+
+***定义一个capture list***
+
+capture list中的每一项是一个weak或unowned关键字和类的实例变量（self）或者一个变量和初始化的值，这些项目都写在方括号里面，用逗号隔开：
+
+```
+lazy var someClosure: (Int, String) -> String = {
+    [unowned self, weak delegate = self.delegate!] (index: Int, stringToProcess: String) -> String in
+    // closure body goes here
+}
+```
+对于没有指定参数列表或者返回值的闭包，
+```
+lazy var someClosure: Void -> String = {
+    [unowned self, weak delegate = self.delegate!] in
+    // closure body goes here
+}
+```
+
+capture list中使用weak还是unowned？
+---
+unowned: 闭包和capture的变量总是引用彼此，并且同时销毁
+
+weak: 必须是optional类型，capture的变量可能是nil。
+
+那么上面的例子就有了解决方法：
+
+```
+class HTMLElement {
+    
+    let name: String
+    let text: String?
+    
+    lazy var asHTML: Void -> String = {
+        [unowned self] in
+        if let text = self.text {
+            return "<\(self.name)>\(text)</\(self.name)>"
+        } else {
+            return "<\(self.name) />"
+        }
+    }
+    
+    init(name: String, text: String? = nil) {
+        self.name = name
+        self.text = text
+    }
+    
+    deinit {
+        print("\(name) is being deinitialized")
+    }
+    
+}
+```
+这次引用情况如下
+![如下图](https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Art/closureReferenceCycle02_2x.png)
+
+这次就可以看到deinitialized的输出：
+
+```
+paragraph = nil
+// prints "p is being deinitialized"
+```

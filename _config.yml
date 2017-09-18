@@ -1,0 +1,53 @@
+markdown: kramdown
+highlighter: pygments
+permalink: /posts/:title.html
+# excerpt_separator: "<!-- more -->"
+
+github: williamhqs
+author: William Hu
+email: 
+disqus: true
+disqus_shortname: 'goaldrive'
+name: "Goal栈"
+url: http://www.goalstack.com
+domain: www.goalstack.com
+all_categories: [
+# ["android", "123","/posts/android.html"], 
+# ["program", "软件编程","/posts/program.html"],
+# ["web", "Web建站","/posts/web.html"],
+# ["linux", "Linux相关","/posts/linux.html"],
+# ["read", "读书笔记","/posts/read.html"],
+# ["other", "杂记","/posts/other.html"],
+["about", "我","/about.html"],
+["", "A coder's life",""]
+]
+
+paginate: 8
+paginate_path: "posts/page:num"
+
+collections:
+  docs:
+    output: true
+
+plugins_dir:
+ - jekyll-paginate
+gems: [jekyll-paginate]
+defaults:
+    -
+        scope:
+            path: "" # empty string for all files
+            type: pages
+        values:
+            layout: default
+    -
+        scope:
+            path: "" # empty string for all files
+            type: posts
+        values:
+            layout: post
+    -
+        scope:
+            path: ""
+            type: drafts
+        values:
+            layout: post

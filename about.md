@@ -1,0 +1,67 @@
+---
+layout: page
+title: "关于：About"
+---
+
+<div style="margin:20px auto">
+<a href="http://stackoverflow.com/users/291240/william-hu" id="stackoverflow" style="width:208px;display:block;float:left;">
+<img src="http://stackoverflow.com/users/flair/291240.png?theme=clean" width="208px" height="58px" alt="profile for William Hu at Stack Overflow, Q&amp;A for professional and enthusiast programmers" title="profile for William Hu at Stack Overflow, Q&amp;A for professional and enthusiast programmers">
+</a>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<b>Author</b>: William Hu, based in ShenZhen now.
+5+ years experience IOS engineer.
+
+<b>Programming Language</b> Objective C, Swift, Ruby on Rails, Sinatra, Android
+
+<b>Email</b> william.hqs@gmail.com
+
+<!-- -----------------------------------------------
+<div><p><b>“ I'm hunting for job now ”</b><button type="button" onclick="window.open('{{site.url}}/assets/resume/William_HU_IOS.pdf')" style="float:right;background:#59b7e9;color:white;border-radius: 4px;border:1px">Download my rescum</button></p></div>
+<div><p><b>“ 我在找工作 ”</b><button type="button" onclick="window.open('{{site.url}}/assets/resume/胡秋实.doc')"style="float:right;background:#59b7e9;color:white;border-radius: 4px;border:1px" >下载我的简历</button></p></div>
+----------------------------------------------- -->
+
+-----------------------------------------------
+
+<b>My Projects in 2015</b>
+<br>
+<div style="text-align: left;" id="about">
+  <span class="box">
+	  <a href="http://revols.com"><img src="{{ site.url }}/assets/iosIcons/Revols.png"></a >
+    <a href="http://revols.com">Revols</a >
+</span>
+  <span class="box">
+	  <a href="http://www.auromabrewing.com"><img src="{{site.url}}/assets/iosIcons/Auroma.png"></a >
+    <a href="http://www.auromabrewing.com">Auroma</a >
+  </span>
+  <span class="box">
+	  <a href="" class="about_a"><img src="{{site.url}}/assets/iosIcons/JumpRope.png"></a >
+    <a href="">JumpRope</a >
+  </span>
+  <span class="box">
+	  <a href="http://www.dispatchrobotics.com"><img src="{{site.url}}/assets/iosIcons/Dispatch.png"></a >
+    <a href="http://www.dispatchrobotics.com">Dispatch</a >
+  </span>
+  <span class="box">
+	  <a href="https://itunes.apple.com/cn/app/mu-guang-pin-zhi-mei-shi-sheng/id1011029423?l=en&mt=8"><img src="{{site.url}}/assets/iosIcons/muguang.png"></a >
+    <a href="https://itunes.apple.com/cn/app/mu-guang-pin-zhi-mei-shi-sheng/id1011029423?l=en&mt=8">目光</a >
+  </span>
+</div>
+-----------------------------------------------
+<br>
+<br>
+
+<b>OpenSource project<b>
+
+-----------------------------------------------
+
+<a href="https://github.com/williamhqs/GSAnalysis">GSAnalysis</a> provides an easy way to draw analysis graphic in Swift. 
+
+<a href="https://github.com/williamhqs/GSSimpleImage">GSSimpleImage</a> provides more functions for UIImageView in Swift.
+
+<br>
+<br>
