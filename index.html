@@ -90,38 +90,17 @@ http://www.templatemo.com/tm-491-flat
                 <div class="cd-full-width">
 
                     <div class="container-fluid js-tm-page-content" data-page-no="2">
-
                         <div class="row tm-img-gallery">
-                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
-                                <a href="img/tm-img-01.jpg">
-                                    <img src="img/tm-img-01-tn.jpg" alt="Image" class="img-fluid tm-img">
-                                </a>
-                            </div>
-                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
-                                <a href="img/tm-img-02.jpg">
-                                    <img src="img/tm-img-02-tn.jpg" alt="Image" class="img-fluid tm-img">
-                                </a>
-                            </div>
-                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
-                                <a href="img/tm-img-03.jpg">
-                                    <img src="img/tm-img-03-tn.jpg" alt="Image" class="img-fluid tm-img">
-                                </a>
-                            </div>
-                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
-                                <a href="img/tm-img-04.jpg">
-                                    <img src="img/tm-img-04-tn.jpg" alt="Image" class="img-fluid tm-img">
-                                </a>
-                            </div>
-                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
-                                <a href="img/tm-img-05.jpg">
-                                    <img src="img/tm-img-05-tn.jpg" alt="Image" class="img-fluid tm-img">
-                                </a>
-                            </div>
-                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
-                                <a href="img/tm-img-06.jpg">
-                                    <img src="img/tm-img-06-tn.jpg" alt="Image" class="img-fluid tm-img">
-                                </a>
-                            </div>
+                            <div id="album_elements"></div>
+                            <script>
+                                var html = "", index;
+                                let element = "<div class=\"col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4\">";
+                                for (index = 2; index <= 22; index++) {
+                                    html = html + element + "<a href=\"img/tm-img-" + index + ".jpg\"><img style=\"width:256px;height:192px;object-fit: cover;\" src=\"img/tn/tm-img-" + index + ".jpg\" alt=\"Image\" class=\"img-fluid tm-img\"></a></div>";
+                                }
+                                document.getElementById("album_elements").innerHTML = html;
+                            </script>
+
                         </div>
 
                     </div>
@@ -242,15 +221,15 @@ http://www.templatemo.com/tm-491-flat
                 gallery: { enabled: true }
             });
 
-            /* Collapse menu after click 
+            /* Collapse menu after click
             -----------------------------------------*/
             $('#tmNavbar a').click(function () {
                 $('#tmNavbar').collapse('hide');
 
-                adjustHeightOfPage($(this).data("no")); // Adjust page height       
+                adjustHeightOfPage($(this).data("no")); // Adjust page height
             });
 
-            /* Browser resized 
+            /* Browser resized
             -----------------------------------------*/
             $(window).resize(function () {
                 var currentPageNo = $(".cd-hero-slider li.selected .js-tm-page-content").data("page-no");
